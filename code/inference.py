@@ -96,11 +96,13 @@ class Inference:
 
                     """ 
                     psnr, ssim = self.get_PSNR_SSIM(output_img, gt)
+                    """
+                    psnr = 0
+                    ssim = 0
                     video_psnr.append(psnr)
                     video_ssim.append(ssim)
                     total_psnr[v] = video_psnr
                     total_ssim[v] = video_ssim
-                    """
 
                     if self.save_image:
                         self.logger.write_log('In save_image if')
