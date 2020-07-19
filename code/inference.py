@@ -67,6 +67,7 @@ class Inference:
             total_psnr = {}
             total_ssim = {}
             videos = sorted(os.listdir(self.input_path))
+            print(*videos, sep = ", ") 
             for v in videos:
                 video_psnr = []
                 video_ssim = []
@@ -122,7 +123,7 @@ class Inference:
                 sum_psnr += sum(total_psnr[k])
                 sum_ssim += sum(total_ssim[k])
                 n_img += len(total_psnr[k])
-            self.logger.write_log("# Total AVG-PSNR={:.5}, AVG-SSIM={:.4}".format(sum_psnr / n_img+1, sum_ssim / n_img+1))
+            self.logger.write_log("# Total AVG-PSNR={:.5}, AVG-SSIM={:.4}".format(sum_psnr / (n_img+1), sum_ssim / (n_img+1)))
 
     def gene_seq(self, img_list, n_seq):
         if self.border:
