@@ -76,9 +76,10 @@ class Inference:
                 input_seqs = self.gene_seq(input_frames, n_seq=self.n_seq)
                 gt_seqs = self.gene_seq(gt_frames, n_seq=self.n_seq)
                 for in_seq, gt_seq in zip(input_seqs, input_seqs):
-                    self.logger.write_log('> Processing image {}'.format(in_seq))
+                    
                     start_time = time.time()
                     filename = os.path.basename(in_seq[self.n_seq // 2]).split('.')[0]
+                    self.logger.write_log('> Processing image {}'.format(filename))
                     inputs = [imageio.imread(p) for p in in_seq]
                     gt = imageio.imread(gt_seq[self.n_seq // 2])
 
@@ -93,11 +94,13 @@ class Inference:
                     forward_time = time.time()
                     output_img = self.tensor2numpy(output)
 
+                    """ 
                     psnr, ssim = self.get_PSNR_SSIM(output_img, gt)
                     video_psnr.append(psnr)
                     video_ssim.append(ssim)
                     total_psnr[v] = video_psnr
                     total_ssim[v] = video_ssim
+                    """
 
                     if self.save_image:
                         self.logger.write_log('In save_image if')
