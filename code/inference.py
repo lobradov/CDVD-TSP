@@ -97,8 +97,8 @@ class Inference:
                     """ 
                     psnr, ssim = self.get_PSNR_SSIM(output_img, gt)
                     """
-                    psnr = 0
-                    ssim = 0
+                    psnr = float(0)
+                    ssim = float(0)
                     video_psnr.append(psnr)
                     video_ssim.append(ssim)
                     total_psnr[v] = video_psnr
