@@ -68,7 +68,7 @@ class Inference:
             total_ssim = {}
             videos = sorted(os.listdir(self.input_path))
             for v in videos:
-                self.logger.write_log('Processing folder: {}'.format(self.v))
+                self.logger.write_log('Processing folder: {}'.format(v))
                 video_psnr = []
                 video_ssim = []
                 input_frames = sorted(glob.glob(os.path.join(self.input_path, v, "*")))
@@ -76,7 +76,7 @@ class Inference:
                 input_seqs = self.gene_seq(input_frames, n_seq=self.n_seq)
                 gt_seqs = self.gene_seq(gt_frames, n_seq=self.n_seq)
                 for in_seq, gt_seq in zip(input_seqs, input_seqs):
-                    self.logger.write_log('> Processing ')
+                    self.logger.write_log('> Processing image {}'.format(in_seq))
                     start_time = time.time()
                     filename = os.path.basename(in_seq[self.n_seq // 2]).split('.')[0]
                     inputs = [imageio.imread(p) for p in in_seq]
