@@ -75,6 +75,7 @@ class Inference:
                 input_seqs = self.gene_seq(input_frames, n_seq=self.n_seq)
                 gt_seqs = self.gene_seq(gt_frames, n_seq=self.n_seq)
                 for in_seq, gt_seq in zip(input_seqs, gt_seqs):
+                    self.logger.write_log('In the loop...')
                     start_time = time.time()
                     filename = os.path.basename(in_seq[self.n_seq // 2]).split('.')[0]
                     inputs = [imageio.imread(p) for p in in_seq]
@@ -98,6 +99,7 @@ class Inference:
                     total_ssim[v] = video_ssim
 
                     if self.save_image:
+                        self.logger.write_log('In save_image if')
                         if not os.path.exists(os.path.join(self.result_path, v)):
                             os.mkdir(os.path.join(self.result_path, v))
                         imageio.imwrite(os.path.join(self.result_path, v, '{}.png'.format(filename)), output_img)
@@ -120,7 +122,7 @@ class Inference:
                 sum_psnr += sum(total_psnr[k])
                 sum_ssim += sum(total_ssim[k])
                 n_img += len(total_psnr[k])
-            self.logger.write_log("# Total AVG-PSNR={:.5}, AVG-SSIM={:.4}".format(sum_psnr / n_img, sum_ssim / n_img))
+            self.logger.write_log("# Total AVG-PSNR={:.5}, AVG-SSIM={:.4}".format(sum_psnr / n_img+1, sum_ssim / n_img+1))
 
     def gene_seq(self, img_list, n_seq):
         if self.border:
